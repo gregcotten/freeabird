@@ -1,5 +1,11 @@
 import itertools, csv, os, copy
 
+def calorie_count(combination):\
+	cal_count = 0
+	for item in combination:
+		cal_count+=int(item[2])
+	return cal_count
+
 def all_combinations(list):
 	list_all_combinations = []
 	for i in range(1, len(list)):
@@ -10,6 +16,21 @@ def all_combinations(list):
 					tuple.append(k)
 			list_all_combinations.append(tuple)
 	return list_all_combinations
+	
+def all_combinations_with_cal_less_than_or_equal_to(list,cal_count):
+	combinations_less_than = []
+	for i in range(1, len(list)):
+		for j in itertools.combinations(list, i):
+			tuple = []
+			for k in j:
+				if k is not None:
+					tuple.append(k)
+			cal_sum = 0
+			for item in tuple:
+				cal_sum+=int(item[2])
+			if cal_sum <= cal_count:
+				combinations_less_than.append(tuple)
+	return combinations_less_than	
 
 def product_to_list(product):
 	list_products = []
@@ -32,21 +53,32 @@ for i in range(1,19): #hardcode first four options (tortillas) are the exclusive
 for i in range(19, len(list)): #hardcode rest of options as inclusive anything goes
 	inclusive_list.append(list[i])
 
-inclusive_all_combinations = all_combinations(inclusive_list)
+inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, 500)
 
 #get all possible combinations of burritos
-all_combinations = []
+"""all_combinations = []
 for i in exclusive_list:
 	for j in inclusive_all_combinations:
-		lst = []
-		for k in j:
-			lst.append(k)
-		lst.insert(0,i)
-		all_combinations.append(lst)
-
+		combination = []
+		for item in j:
+			combination.append(item)
+		combination.insert(0,i)
+		all_combinations.append(combination)
+"""
 less_than_fivehundredcalories = []
+for i in exclusive_list:
+	for j in inclusive_all_combinations:
+		combination = []
+		for item in j:
+			combination.append(item)
+		combination.insert(0,i)
+		if calorie_count(combination) <= 500:
+			less_than_fivehundredcalories.append(combination)
 
-for combination in all_combinations:
+print "500 Calories or less: " + str(len(less_than_fivehundredcalories))
+
+
+"""for combination in all_combinations:
 	calorie_sum = 0
 	for item in combination:
 		calorie_sum += int(item[2])
@@ -55,3 +87,4 @@ for combination in all_combinations:
 		
 
 print "All Combinations: " + str(len(all_combinations)) + "\n500 Calories or less: " + str(len(less_than_fivehundredcalories))
+"""
