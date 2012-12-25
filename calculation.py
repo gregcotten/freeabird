@@ -48,9 +48,15 @@ with open("freebirds_caloric_info_freebird_burrito_1.csv") as data:
 
 exclusive_list = [] #right now just different tortillas should be exclusive
 inclusive_list = [] #everything else can supposedly be mashed together in a burrito
+<<<<<<< HEAD
 for i in range(1,19): #hardcode first 19 options (tortillas) are the exclusive options
 	exclusive_list.append(list[i])
 for i in range(20, len(list)): #hardcode rest of options as inclusive anything goes
+=======
+for i in range(1,19): #hardcode first four options (tortillas) are the exclusive options
+	exclusive_list.append(list[i])
+for i in range(19, len(list)): #hardcode rest of options as inclusive anything goes
+>>>>>>> parent of 2132e41... exclusives should end after crispy corn
 	inclusive_list.append(list[i])
 
 inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, 500)
