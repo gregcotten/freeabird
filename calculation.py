@@ -1,6 +1,6 @@
 import itertools, csv, os, copy
 
-def calorie_count(combination):\
+def calorie_count(combination):
 	cal_count = 0
 	for item in combination:
 		cal_count+=int(item[2])
@@ -37,55 +37,64 @@ def product_to_list(product):
 	for i in product:
 		list_products.append(i)
 	return list_products
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
-os.chdir("Data")
 
-data = []
-with open("freebirds_caloric_info_freebird_burrito_1.csv") as data:
-	reader = csv.reader(data, delimiter=",")
-	for row in reader:
-		data.append(row)
+def optimized_calculation():
 
-exclusive_list = [] #right now just different tortillas should be exclusive
-inclusive_list = [] #everything else can supposedly be mashed together in a burrito
-for i in range(1,21): #hardcode first four options (tortillas) are the exclusive options
-	exclusive_list.append(data[i])
-for i in range(21, len(data)): #hardcode rest of options as inclusive anything goes
-	inclusive_list.append(data[i])
 
-inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, 500)
 
-less_than_fivehundredcalories = []
-for i in exclusive_list:
-	for j in inclusive_all_combinations:
-		combination = []
-		for item in j:
-			combination.append(item)
-		combination.insert(0,i)
-		if calorie_count(combination) <= 500:
+	
+	os.chdir(os.path.dirname(os.path.realpath(__file__)))
+	os.chdir("Data")
+
+	data_list = []
+	with open("freebirds_caloric_info_freebird_burrito_1.csv") as data:
+		reader = csv.reader(data, delimiter=",")
+		for row in reader:
+			data_list.append(row)
+			
+	print(data_list[19])
+
+	exclusive_list = [] #right now just different tortillas should be exclusive
+	inclusive_list = [] #everything else can supposedly be mashed together in a burrito
+	for i in range(1,19): #hardcode first four options (tortillas) are the exclusive options
+		exclusive_list.append(data_list[i])
+	for i in range(19, len(data_list)): #hardcode rest of options as inclusive anything goes
+		inclusive_list.append(data_list[i])
+
+	inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, 500)
+
+	less_than_fivehundredcalories = []
+	for i in exclusive_list:
+		for j in inclusive_all_combinations:
+			combination = []
+			for item in j:
+				combination.append(item)
+			combination.insert(0,i)
+			if calorie_count(combination) <= 500:
+				less_than_fivehundredcalories.append(combination)
+
+	print "500 Calories or less: " + str(len(less_than_fivehundredcalories))
+
+
+	#get all possible combinations of burritos
+	"""all_combinations = []
+	for i in exclusive_list:
+		for j in inclusive_all_combinations:
+			combination = []
+			for item in j:
+				combination.append(item)
+			combination.insert(0,i)
+			all_combinations.append(combination)
+	"""
+
+	"""for combination in all_combinations:
+		calorie_sum = 0
+		for item in combination:
+			calorie_sum += int(item[2])
+		if calorie_sum <= 500:
 			less_than_fivehundredcalories.append(combination)
+			
 
-print "500 Calories or less: " + str(len(less_than_fivehundredcalories))
-
-
-#get all possible combinations of burritos
-"""all_combinations = []
-for i in exclusive_list:
-	for j in inclusive_all_combinations:
-		combination = []
-		for item in j:
-			combination.append(item)
-		combination.insert(0,i)
-		all_combinations.append(combination)
-"""
-
-"""for combination in all_combinations:
-	calorie_sum = 0
-	for item in combination:
-		calorie_sum += int(item[2])
-	if calorie_sum <= 500:
-		less_than_fivehundredcalories.append(combination)
-		
-
-print "All Combinations: " + str(len(all_combinations)) + "\n500 Calories or less: " + str(len(less_than_fivehundredcalories))
-"""
+	print "All Combinations: " + str(len(all_combinations)) + "\n500 Calories or less: " + str(len(less_than_fivehundredcalories))
+	"""
+optimized_calculation()
