@@ -38,7 +38,7 @@ def product_to_list(product):
 		list_products.append(i)
 	return list_products
 
-def optimized_calculation(max_cal):
+def do_optimized_calculation(max_cal):
 	os.chdir(os.path.dirname(os.path.realpath(__file__)))
 	os.chdir("Data")
 
@@ -50,13 +50,14 @@ def optimized_calculation(max_cal):
 
 	exclusive_list = [] #right now just different tortillas should be exclusive
 	inclusive_list = [] #everything else can supposedly be mashed together in a burrito
-	for i in range(1,19): #hardcode first four options (tortillas) are the exclusive options
+	for i in range(1,20): #hardcode first 19 options (tortillas) are the exclusive options
 		exclusive_list.append(data_list[i])
-	for i in range(19, len(data_list)): #hardcode rest of options as inclusive anything goes
+	for i in range(20, len(data_list)): #hardcode rest of options as inclusive anything goes
 		inclusive_list.append(data_list[i])
-
+	print "Calculating Inclusive Combinations"
 	inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, max_cal)
 
+	print "Calculating All Combinations"
 	less_than_fivehundredcalories = []
 	for i in exclusive_list:
 		for j in inclusive_all_combinations:
@@ -69,7 +70,6 @@ def optimized_calculation(max_cal):
 
 	print "500 Calories or less: " + str(len(less_than_fivehundredcalories))
 	return less_than_fivehundredcalories
-	
 	"""
 	#get all possible combinations of burritos
 	all_combinations = []
@@ -81,7 +81,6 @@ def optimized_calculation(max_cal):
 			combination.insert(0,i)
 			all_combinations.append(combination)
 	"""
-
 	"""for combination in all_combinations:
 		calorie_sum = 0
 		for item in combination:
@@ -92,4 +91,5 @@ def optimized_calculation(max_cal):
 
 	print "All Combinations: " + str(len(all_combinations)) + "\n500 Calories or less: " + str(len(less_than_fivehundredcalories))
 	"""
-less_than_fivehundredcalories = optimized_calculation(500)
+if __name__ == "__main__":
+    less_than_fivehundredcalories = do_optimized_calculation(500)
