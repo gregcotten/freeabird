@@ -40,31 +40,21 @@ def product_to_list(product):
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 os.chdir("Data")
 
-list = []
+data = []
 with open("freebirds_caloric_info_freebird_burrito_1.csv") as data:
 	reader = csv.reader(data, delimiter=",")
 	for row in reader:
-		list.append(row)
+		data.append(row)
 
 exclusive_list = [] #right now just different tortillas should be exclusive
 inclusive_list = [] #everything else can supposedly be mashed together in a burrito
 for i in range(1,21): #hardcode first four options (tortillas) are the exclusive options
-	exclusive_list.append(list[i])
-for i in range(21, len(list)): #hardcode rest of options as inclusive anything goes
-	inclusive_list.append(list[i])
+	exclusive_list.append(data[i])
+for i in range(21, len(data)): #hardcode rest of options as inclusive anything goes
+	inclusive_list.append(data[i])
 
 inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, 500)
 
-#get all possible combinations of burritos
-"""all_combinations = []
-for i in exclusive_list:
-	for j in inclusive_all_combinations:
-		combination = []
-		for item in j:
-			combination.append(item)
-		combination.insert(0,i)
-		all_combinations.append(combination)
-"""
 less_than_fivehundredcalories = []
 for i in exclusive_list:
 	for j in inclusive_all_combinations:
@@ -77,6 +67,17 @@ for i in exclusive_list:
 
 print "500 Calories or less: " + str(len(less_than_fivehundredcalories))
 
+
+#get all possible combinations of burritos
+"""all_combinations = []
+for i in exclusive_list:
+	for j in inclusive_all_combinations:
+		combination = []
+		for item in j:
+			combination.append(item)
+		combination.insert(0,i)
+		all_combinations.append(combination)
+"""
 
 """for combination in all_combinations:
 	calorie_sum = 0
