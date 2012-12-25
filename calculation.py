@@ -20,16 +20,16 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 os.chdir("Data")
 
 list = []
-with open("freebirds_caloric_info_freebird_burrito.csv") as data:
+with open("freebirds_caloric_info_freebird_burrito_1.csv") as data:
 	reader = csv.reader(data, delimiter=",")
 	for row in reader:
 		list.append(row)
 
 exclusive_list = [] #right now just different tortillas should be exclusive
 inclusive_list = [] #everything else can supposedly be mashed together in a burrito
-for i in range(1,5): #hardcode first four options (tortillas) are the exclusive options
+for i in range(1,19): #hardcode first four options (tortillas) are the exclusive options
 	exclusive_list.append(list[i])
-for i in range(5, len(list)): #hardcode rest of options as inclusive anything goes
+for i in range(19, len(list)): #hardcode rest of options as inclusive anything goes
 	inclusive_list.append(list[i])
 
 inclusive_all_combinations = all_combinations(inclusive_list)
@@ -52,5 +52,6 @@ for combination in all_combinations:
 		calorie_sum += int(item[2])
 	if calorie_sum <= 500:
 		less_than_fivehundredcalories.append(combination)
+		
 
-print "All Combinations: " + str(len(all_combinations)) + "\n500 Calories or less: " + str(len(less_than_fivehundredcalories))	
+print "All Combinations: " + str(len(all_combinations)) + "\n500 Calories or less: " + str(len(less_than_fivehundredcalories))
