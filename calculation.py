@@ -77,6 +77,8 @@ def do_optimized_calculation(filename,max_cal):
 	print "500 Calories or less: " + str(len(less_than_maxcal_combinations))
 	print "Time: " + str(end-start) + " seconds"
 	print ""
+	
+	return (all_combinations, less_than_maxcal_combinations)
 
 if __name__ == "__main__":
-    less_than_maxcal_combinations = do_optimized_calculation("freebirds_caloric_info_freebird_burrito_super_monster_burrito.csv",500)
+    do_optimized_calculation("freebirds_caloric_info_freebird_burrito_super_monster_burrito.csv",500)
