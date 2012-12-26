@@ -52,7 +52,7 @@ def do_optimized_calculation(max_cal):
 	inclusive_list = [] #everything else can supposedly be mashed together in a burrito
 	for i in range(1,20): #hardcode first 19 options (tortillas) are the exclusive options
 		exclusive_list.append(data_list[i])
-	for i in range(20, len(data_list)): #hardcode rest of options as inclusive anything goes
+	for i in range(21, len(data_list)): #hardcode rest of options as inclusive anything goes
 		inclusive_list.append(data_list[i])
 	print "Calculating Inclusive Combinations"
 	inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, max_cal)
