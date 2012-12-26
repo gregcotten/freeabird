@@ -1,4 +1,5 @@
 import itertools, csv, os, copy
+from time import time
 
 def calorie_count(combination):
 	cal_count = 0
@@ -38,12 +39,13 @@ def product_to_list(product):
 		list_products.append(i)
 	return list_products
 
-def do_optimized_calculation(max_cal):
+def do_optimized_calculation(filename,max_cal):
+	start = time()
 	os.chdir(os.path.dirname(os.path.realpath(__file__)))
 	os.chdir("Data")
 
 	data_list = []
-	with open("freebirds_caloric_info_freebird_burrito_hybird_burrito.csv") as data:
+	with open(filename) as data:
 		reader = csv.reader(data, delimiter=",")
 		for row in reader:
 			data_list.append(row)
@@ -54,11 +56,12 @@ def do_optimized_calculation(max_cal):
 		exclusive_list.append(data_list[i])
 	for i in range(4, len(data_list)): #hardcode rest of options as inclusive anything goes
 		inclusive_list.append(data_list[i])
-	print "Calculating Inclusive Combinations"
+
 	inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, max_cal)
 
-	print "Calculating All Combinations"
-	less_than_fivehundredcalories = []
+
+	all_combinations = []
+	less_than_maxcal_combinations = []
 	for i in exclusive_list:
 		for j in inclusive_all_combinations:
 			combination = []
@@ -66,30 +69,14 @@ def do_optimized_calculation(max_cal):
 				combination.append(item)
 			combination.insert(0,i)
 			if calorie_count(combination) <= max_cal:
-				less_than_fivehundredcalories.append(combination)
-
-	print "500 Calories or less: " + str(len(less_than_fivehundredcalories))
-	return less_than_fivehundredcalories
-	"""
-	#get all possible combinations of burritos
-	all_combinations = []
-	for i in exclusive_list:
-		for j in inclusive_all_combinations:
-			combination = []
-			for item in j:
-				combination.append(item)
-			combination.insert(0,i)
+				less_than_maxcal_combinations.append(combination)
 			all_combinations.append(combination)
-	"""
-	"""for combination in all_combinations:
-		calorie_sum = 0
-		for item in combination:
-			calorie_sum += int(item[2])
-		if calorie_sum <= 500:
-			less_than_fivehundredcalories.append(combination)
-			
+	end = time()
+	print filename + " stats:"
+	print "All Combinations: " + str(len(all_combinations))
+	print "500 Calories or less: " + str(len(less_than_maxcal_combinations))
+	print "Time: " + str(end-start) + " seconds"
+	print ""
 
-	print "All Combinations: " + str(len(all_combinations)) + "\n500 Calories or less: " + str(len(less_than_fivehundredcalories))
-	"""
 if __name__ == "__main__":
-    less_than_fivehundredcalories = do_optimized_calculation(500)
+    less_than_maxcal_combinations = do_optimized_calculation("freebirds_caloric_info_freebird_burrito_hybird_burrito.csv",500)
