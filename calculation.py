@@ -43,16 +43,16 @@ def do_optimized_calculation(max_cal):
 	os.chdir("Data")
 
 	data_list = []
-	with open("freebirds_caloric_info_freebird_burrito_kids_quesadilla.csv") as data:
+	with open("freebirds_caloric_info_freebird_burrito_hybird_burrito.csv") as data:
 		reader = csv.reader(data, delimiter=",")
 		for row in reader:
 			data_list.append(row)
 
 	exclusive_list = [] #right now just different tortillas should be exclusive
 	inclusive_list = [] #everything else can supposedly be mashed together in a burrito
-	for i in range(1,2): #hardcode first 19 options (tortillas) are the exclusive options
+	for i in range(1,4): #hardcode exclusive options
 		exclusive_list.append(data_list[i])
-	for i in range(2, len(data_list)): #hardcode rest of options as inclusive anything goes
+	for i in range(4, len(data_list)): #hardcode rest of options as inclusive anything goes
 		inclusive_list.append(data_list[i])
 	print "Calculating Inclusive Combinations"
 	inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, max_cal)
