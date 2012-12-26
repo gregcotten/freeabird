@@ -79,4 +79,4 @@ def do_optimized_calculation(filename,max_cal):
 	print ""
 
 if __name__ == "__main__":
-    less_than_maxcal_combinations = do_optimized_calculation("freebirds_caloric_info_freebird_burrito_monster_burrito.csv",500)
+    less_than_maxcal_combinations = do_optimized_calculation("freebirds_caloric_info_freebird_burrito_super_monster_burrito.csv",500)
