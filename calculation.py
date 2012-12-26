@@ -7,7 +7,7 @@ def calorie_count(combination):
 		cal_count+=int(item[2])
 	return cal_count
 
-def all_combinations(list):
+def all_combinations_from_list(list):
 	list_all_combinations = []
 	for i in range(1, len(list)):
 		for j in itertools.combinations(list, i):
@@ -57,7 +57,7 @@ def do_optimized_calculation(filename,max_cal):
 	for i in range(5, len(data_list)): #hardcode rest of options as inclusive anything goes
 		inclusive_list.append(data_list[i])
 
-	inclusive_all_combinations = all_combinations(inclusive_list)
+	inclusive_all_combinations = all_combinations_from_list(inclusive_list)
 
 
 	all_combinations = []
