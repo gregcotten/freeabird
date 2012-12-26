@@ -57,7 +57,7 @@ def do_optimized_calculation(filename,max_cal):
 	for i in range(5, len(data_list)): #hardcode rest of options as inclusive anything goes
 		inclusive_list.append(data_list[i])
 
-	inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, max_cal)
+	inclusive_all_combinations = all_combinations(inclusive_list)
 
 
 	all_combinations = []
