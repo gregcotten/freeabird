@@ -43,7 +43,7 @@ def do_optimized_calculation(max_cal):
 	os.chdir("Data")
 
 	data_list = []
-	with open("freebirds_caloric_info_freebird_burrito_kids_burrito.csv") as data:
+	with open("freebirds_caloric_info_freebird_burrito_kids_quesadilla.csv") as data:
 		reader = csv.reader(data, delimiter=",")
 		for row in reader:
 			data_list.append(row)
