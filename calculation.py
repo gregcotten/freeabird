@@ -54,7 +54,7 @@ def do_optimized_calculation(filename,max_cal):
 	inclusive_list = [] #everything else can supposedly be mashed together in a burrito
 	for i in range(1,4): #hardcode exclusive options
 		exclusive_list.append(data_list[i])
-	for i in range(4, len(data_list)): #hardcode rest of options as inclusive anything goes
+	for i in range(5, len(data_list)): #hardcode rest of options as inclusive anything goes
 		inclusive_list.append(data_list[i])
 
 	inclusive_all_combinations = all_combinations_with_cal_less_than_or_equal_to(inclusive_list, max_cal)
@@ -79,4 +79,4 @@ def do_optimized_calculation(filename,max_cal):
 	print ""
 
 if __name__ == "__main__":
-    less_than_maxcal_combinations = do_optimized_calculation("freebirds_caloric_info_freebird_burrito_hybird_burrito.csv",500)
+    less_than_maxcal_combinations = do_optimized_calculation("freebirds_caloric_info_freebird_burrito_monster_burrito.csv",500)
